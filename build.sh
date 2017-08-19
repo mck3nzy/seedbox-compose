@@ -51,9 +51,9 @@ if [ $USER = "root" ] ; then
 				## Installing Nginx
 				install_nginx
 				## Installing ZSH
-				install_zsh
+				##install_zsh
 				## Check for LetsEncrypt packages on system
-				install_letsencrypt
+				##install_letsencrypt
 				## Defines parameters for dockers : password, domains and replace it in docker-compose file
 				define_parameters
 				## Choose wich services install
@@ -63,17 +63,17 @@ if [ $USER = "root" ] ; then
 				## Generate dockers apps running in background
 				docker_compose
 				## Create reverse proxy for each apps
-				create_reverse
+				##create_reverse
 				## Ask user to instal FTP
-				install_ftp_server
+				##install_ftp_server
 				## Resuming seedbox-compose installation
 				resume_seedbox
 				## Backup dockers app Configuration
-				backup_docker_conf
+				##backup_docker_conf
 				#schedule_backup_seedbox
 				## Display Teamspeak IDs
 				##access_token_ts
-				schedule_backup_seedbox
+				##schedule_backup_seedbox
 	    	else
 				clear
 				echo -e " ${RED}--> Seedbox-Compose already installed !${NC}"
