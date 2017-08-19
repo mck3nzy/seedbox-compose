@@ -8,12 +8,12 @@ function under_developpment() {
 	echo ""
 }
 
-function check_domain() {
-	if (whiptail --title "Domain access" --yesno "Are you sure your DNS entries are correctly configured ? We can test them now ;)" 10 90) then
-		TESTDOMAIN=$1
-		echo -e " ${BWHITE}* Checking domain - ping $TESTDOMAIN...${NC}"
-		ping -c 1 $TESTDOMAIN | grep "$IPADDRESS" > /dev/null
-		checking_errors $?
+#function check_domain() {
+	#if (whiptail --title "Domain access" --yesno "Are you sure your DNS entries are correctly configured ? We can test them now ;)" 10 90) then
+	#	TESTDOMAIN=$1
+	#	echo -e " ${BWHITE}* Checking domain - ping $TESTDOMAIN...${NC}"
+	#	ping -c 1 $TESTDOMAIN | grep "$IPADDRESS" > /dev/null
+	#	checking_errors $?
 		# for line in $(cat $SERVICESAVAILABLE)
 		# do
 		# 	DOCKERAPPLICATION=$(echo $line | cut -d\- -f1)
@@ -21,9 +21,9 @@ function check_domain() {
 		# 	ping -c 1 ${DOCKERAPPLICATION,,}.$TESTDOMAIN | grep "$IPADDRESS" > /dev/null 2>&1
 		# 	checking_errors $?
 		# done
-	fi
+	#fi
 	# pause
-}
+#}
 
 function check_dir() {
 	if [[ $1 != $BASEDIR ]]; then
@@ -274,7 +274,7 @@ function install_docker() {
 		fi
 		service docker start > /dev/null 2>&1
 		echo " * Installing Docker-compose"
-		curl -L https://github.com/docker/compose/releases/download/1.12.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+		curl -L https://github.com/docker/compose/releases/download/1.15.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
 		chmod +x /usr/local/bin/docker-compose
 		if [[ "$?" == "0" ]]; then
 			echo -e "	${GREEN}* Docker-Compose successfully installed${NC}"
@@ -306,11 +306,11 @@ function install_letsencrypt() {
 
 function define_parameters() {
 	echo -e "${BLUE}### USER INFORMATIONS ###${NC}"
-	USEDOMAIN="y"
+	USEDOMAIN="n"
 	CURRTIMEZONE=$(cat /etc/timezone)
 	create_user
-	CONTACTEMAIL=$(whiptail --title "Email address" --inputbox \
-	"Please enter your email address :" 7 50 3>&1 1>&2 2>&3)
+	#CONTACTEMAIL=$(whiptail --title "Email address" --inputbox \
+	#"Please enter your email address :" 7 50 3>&1 1>&2 2>&3)
 	TIMEZONEDEF=$(whiptail --title "Timezone" --inputbox \
 	"Please enter your timezone" 7 66 "$CURRTIMEZONE" \
 	3>&1 1>&2 2>&3)
